@@ -16,7 +16,10 @@ const app = express()
 app.use(cors());
 app.use(express.json())
 
-app.get('/', (req, res) => res.json('Here is get router'))
+app.get('/',async(req, res) => {
+    const employee_list = await employees.find().toArray()
+    res.json(employee_list)
+})
 
 app.post('/', async(req, res) => {
     await employees.insertOne({

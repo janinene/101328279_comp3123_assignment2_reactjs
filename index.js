@@ -23,8 +23,8 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTop
     });
 
 
-app.use("/employee", employRoute)
-app.use("/user", userRoute)
+app.use("/api/employee", employRoute)
+app.use("/api/user", userRoute)
 
 
 app.get('/', (req, res) => {

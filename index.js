@@ -22,8 +22,7 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTop
 app.use("/employee", employRoute)
 
 
-app.route("/")
-.get((req, res) => {
+app.get('/', (req, res) => {
     res.send("<h1>Assignment 2</h1> <br> <h2>Stu: Janine</h2>")
 })
 

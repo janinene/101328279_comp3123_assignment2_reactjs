@@ -24,14 +24,6 @@ routes.post('/signup', async(req,res) => {
                 res.status(500)
                     .send({ message:  err.message || "Some error occurred while creating the Account Details." })
             })
-    try {
-        const newAccount = new userAccountModel(req.body)
-        const account = await newAccount.save()
-        return res.status(201).send(account)
-    }
-    catch (error) {
-        return res.status(400).send(error)
-    }
 })
 
 
@@ -101,6 +93,18 @@ try{
 catch (error) {
     res.status(400).send(error)
 }    
+
+});
+
+// ============ Users Testing ============
+routes.get('/users', async (req,res) => {                   
+    try {
+        const user_content = await userAccountModel.find()
+        res.status(200)
+            .send(user_content)
+    }catch (error) {
+        res.status(400).send(error)
+    }
 
 });
 

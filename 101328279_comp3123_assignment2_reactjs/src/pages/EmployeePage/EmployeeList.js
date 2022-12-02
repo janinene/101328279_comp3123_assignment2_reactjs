@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import axios from 'axios';
-// import EmpKey from './keys/employee_list_key'
-// import { Link } from "react-router-dom";
+
+import EmpKey from '../keys/employee_list_key'
+// import { Outlet, Link } from "react-router-dom";
+// import View from './/ViewEmployee';
+
+
 
 export default class Employee_List extends Component {
     constructor(props) {
@@ -10,12 +14,40 @@ export default class Employee_List extends Component {
             employees: []
         }
     }
+
     componentDidMount() {
         axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee`)
         .then(res => {
             // console.log(res.data);                  //for testing list
             const employees = res.data;
             this.setState({ employees });
+        })
+    }
+
+     //Get Employee By ID
+     getEmployeeDataByID = (id) => {
+        axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
+        .then(res =>  { 
+            console.log(res.data)
+        })
+    }
+
+    getEmployees() {
+        return this.state.employees.map((employee) =>{
+            return <EmpKey employees={employee} key={employee.id} />;
+        })
+    }
+
+    //Get User By ID
+    deleteUserDataByID = (id) => {
+        axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+        .then(res =>  { 
+            console.log(res.data)
+            let userList = this.state.users.filter(u => {
+                return u.id !== id
+            })
+
+            this.setState({...this.state, users: userList})
         })
     }
 
@@ -34,25 +66,15 @@ export default class Employee_List extends Component {
                         </thead>
                         <tbody>
                         {
-                            this.state.employees.map((employee) => (
-                            <>                                                    
-                            <tr>  
-                                <td>{employee.first_name}</td>    
-                                <td>{employee.last_name}</td>    
-                                <td>{employee.email}</td>   
-                                <td>
-                                    <button type="submit" className="btn btn-success">Update</button>
-                                    <button type="submit" className="btn btn-danger cancel">Delete</button>
-                                </td>   
-                            </tr>                                                                                             
-                            </>                        
-                        ))
+                            this.getEmployees()
                         }
                         </tbody> 
                     </table>
                 </div>
                 
+                {/* <Outlet /> */}
             </>
         )
     } 
 }
+

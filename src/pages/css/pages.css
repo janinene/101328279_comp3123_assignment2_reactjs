@@ -1,0 +1,17 @@
+.add-employee, .employee-list{
+    margin: 100px;
+    border: 1px solid #FF9339;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.cancel {
+    margin-left: 5px;
+}
+
+.button-div {
+    text-align: center;
+}

@@ -2,12 +2,14 @@ import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";      // to add bootstrap
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import EmployeeList from './pages/EmployeeList';
-import AddEmployee from './pages/AddEmployee';
-import Navigation from './pages/Navigation';
-import Home from './pages/Home';
-import UserLogin from './pages/UserLogin';
-import SignUp from './pages/SignUp';
+import EmployeeList from './pages/EmployeePage/EmployeeList';
+import AddEmployee from './pages/EmployeePage/AddEmployee';
+import Navigation from './pages/EmployeePage/Navigation';
+import Home from './pages/EmployeePage/Home';
+import View from './pages/EmployeePage/ViewEmployee';
+import Edit from './pages/EmployeePage/EditEmployee';
+import UserLogin from './pages/UserPage/UserLogin';
+import SignUp from './pages/UserPage/SignUp';
 
 
 function App() {
@@ -18,7 +20,9 @@ function App() {
         <Routes>
             <Route path="/" element={<Navigation/>} >
               <Route index element={<Home/>} />
-              <Route path="list"element={<EmployeeList/>} />
+              <Route path="list" element={<EmployeeList/>} />
+              <Route path="view/:id" element={<View/>} />
+              <Route path="edit/:id" element={<Edit/>} />
               <Route path="add" element={<AddEmployee/>} />
             </Route>
         </Routes>

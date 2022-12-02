@@ -1,44 +1,13 @@
 import React, { Component } from "react";
-import axios from 'axios';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Add_Employee extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-            first_name : "",
-            last_name : "",
-            email: ""
-        }
-    }
-
-    onChangeEvent = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    createNewEmployee = async (e) => {
-        e.preventDefault();
-        const newEmployee = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            email: this.state.email
-        }
-        await axios.post(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/add`, newEmployee )
-        // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
-        .then(res => { 
-            console.log(res.status); 
-            // console.log(res.data);
-        })
-        .catch(error => console.log(error))
-    }
-
     render() {
         return (
             <div className="add-employee">
                 <h1>Add Employee</h1>
     
-                <form onSubmit={this.createNewEmployee}>
+                <form>
                     <div className="form-group">
                             <label htmlFor="firstName">First Name:</label>
                             <input 
@@ -46,8 +15,8 @@ export default class Add_Employee extends Component {
                                 className="form-control" 
                                 id="firstName" 
                                 name="first_name" 
-                                value={this.state.first_name}
-                                onChange={this.onChangeEvent}
+                                // value={this.state.first_name}
+                                // onChange={this.onChangeFirstName}
                                 placeholder="First Name" required
                             />
                     </div>
@@ -59,8 +28,8 @@ export default class Add_Employee extends Component {
                                 className="form-control" 
                                 id="lastName" 
                                 name="last_name" 
-                                value={this.state.last_name}
-                                onChange={this.onChangeEvent}
+                                // value={this.state.last_name}
+                                // onChange={this.onChangeLastName}
                                 placeholder="Last Name" required
                             />
                     </div>
@@ -72,15 +41,16 @@ export default class Add_Employee extends Component {
                                 className="form-control" 
                                 id="emailAddress"
                                 name="email"
-                                value={this.state.email}
-                                onChange={this.onChangeEvent}
+                                // value={this.state.email}
+                                // onChange={this.onChangeEmail}
                                 placeholder="Email Address" required
                             />
                     </div>
                     <br />
                     <div className='button-div'>
+                        {/* <button type="submit" className="btn btn-success" onClick={this.saveEmployee}>Save</button> */}
                         <button type="submit" className="btn btn-success">Save</button>
-                        {/* <button type="submit" className="btn btn-danger cancel">Cancel</button> */}
+                        <button type="submit" className="btn btn-danger cancel">Cancel</button>
                     </div>                        
                 </form>
             </div>

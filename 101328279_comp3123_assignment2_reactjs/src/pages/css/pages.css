@@ -17,10 +17,18 @@ h1 {
     text-align: center;
 }
 
-.cancel {
+.cancel, .sign-up {
     margin-left: 5px;
 }
 
 .button-div {
     text-align: center;
+}
+
+.user-login{
+    margin: auto;
+    margin-top: 50px;
+    padding: 30px;
+    border: 1px solid #FF9339;
+    width: 300px;
 }

@@ -40,14 +40,14 @@ export default class Employee_List extends Component {
 
     //Get User By ID
     deleteUserDataByID = (id) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+        axios.delete(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
         .then(res =>  { 
             console.log(res.data)
-            let userList = this.state.users.filter(u => {
+            let employeeList = this.state.employees.filter(u => {
                 return u.id !== id
             })
 
-            this.setState({...this.state, users: userList})
+            this.setState({...this.state, employees: employeeList})
         })
     }
 

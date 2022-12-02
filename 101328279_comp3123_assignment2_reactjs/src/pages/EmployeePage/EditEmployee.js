@@ -1,10 +1,9 @@
 import axios from 'axios'
 import React, {useEffect, useState} from 'react'
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import '../css/pages.css';
 
 export default function EditEmployee() {
-    let navigate = useNavigate();       //use for cancel button
     let { id } = useParams();
     const [employee, setEmployee] = useState({
         first_name: "",
@@ -15,20 +14,20 @@ export default function EditEmployee() {
     const {first_name, last_name, email} = employee
 
     useEffect( () => {
-        getEmployee()
-    }, [])
-    
-    //Get Employee By ID
-    const getEmployee = async () => {
-        await axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
+         // set our variable to true
+        let isApiSubscribed = true;
+        axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
         .then(res =>  { 
+            if(isApiSubscribed){
            setEmployee(res.data)
             // console.log(res.data)
+            }
         })
         .catch(error => {
             console.log(error);
         })
-    }
+    }, [id])
+    
 
     let onSubmit = async (e) => {
         e.preventDefault();
@@ -88,8 +87,9 @@ export default function EditEmployee() {
                 </div>
                 <br />
                 <div className='button-div'>
-                    <button type="submit" className="btn btn-secondary cancel" onClick={() => navigate(-1)}>Back</button>
-                    <button type="submit" className="btn btn-success cancel">Save</button>
+                    <button type="submit" className="btn btn-success">Save</button>
+                    <Link to='/list'><button type="submit" className="btn btn-danger cancel">Cancel</button></Link>
+                    <Link to='/list'><button type="submit" className="btn btn-secondary cancel">Back</button></Link>
                 </div>                        
             </form>
         </div>

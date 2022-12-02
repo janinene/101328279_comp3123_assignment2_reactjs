@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import '../css/pages.css';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 export default class Add_Employee extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export default class Add_Employee extends Component {
             email: ""
         }
     }
+
 
     onChangeEvent = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -29,7 +31,8 @@ export default class Add_Employee extends Component {
         // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
         .then(res => { 
             console.log(res.status); 
-            alert('Employee Added')
+            if (res.status === 200)
+                alert('Employee Added')
             // console.log(res.data);
         })
         .catch(error => console.log(error))
@@ -82,7 +85,7 @@ export default class Add_Employee extends Component {
                     <br />
                     <div className='button-div'>
                         <button type="submit" className="btn btn-success">Save</button>
-                        {/* <button type="submit" className="btn btn-danger cancel">Cancel</button> */}
+                        <Link to='/list'><button type="submit" className="btn btn-danger cancel">Cancel</button></Link>
                     </div>                        
                 </form>
             </div>

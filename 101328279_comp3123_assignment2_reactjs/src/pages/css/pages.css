@@ -1,4 +1,4 @@
-.add-employee, .employee-list{
+.add-employee, .employee-list, .view-employee{
     margin: 100px;
     border: 1px solid #FF9339;
     padding: 20px;
@@ -31,4 +31,19 @@ h1 {
     padding: 30px;
     border: 1px solid #FF9339;
     width: 300px;
+}
+
+.view-container {
+    text-align: center;
+    font-size: 20pt;
+}
+
+.view-table tbody tr td:first-child{
+    text-align: right;
+    padding-right: 20px;
+}
+
+.view-table tbody tr td:last-child{
+    text-align: left;
+    padding-right: 20px;
 }

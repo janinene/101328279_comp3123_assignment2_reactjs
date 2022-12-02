@@ -15,7 +15,7 @@ export default function employee_list_key(props) {
                     <Link to={"/edit/"+props.employees.id}>
                         <button type="submit" className="btn btn-success cancel">Edit</button>                  
                     </Link> 
-                    <Link to={"/list/"+':' + props.employees.id}>
+                    <Link to={"/list/" + props.employees.id}>
                         <button type="submit" className="btn btn-danger cancel">Delete</button>             
                     </Link>                     
                     

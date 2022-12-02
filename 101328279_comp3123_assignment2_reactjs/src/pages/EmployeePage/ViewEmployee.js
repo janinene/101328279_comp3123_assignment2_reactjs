@@ -27,7 +27,7 @@ export default function ViewEmployee() {
   return (
     <>
         <div className='view-employee'>
-            <h1>ViewEmployee</h1>
+            <h1>View Employee Details</h1>
             <br />
             <div className='view-container'>
                 <table className="view-table">

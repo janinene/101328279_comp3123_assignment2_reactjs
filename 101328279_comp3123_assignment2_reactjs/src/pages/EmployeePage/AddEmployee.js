@@ -29,6 +29,7 @@ export default class Add_Employee extends Component {
         // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
         .then(res => { 
             console.log(res.status); 
+            alert('Employee Added')
             // console.log(res.data);
         })
         .catch(error => console.log(error))

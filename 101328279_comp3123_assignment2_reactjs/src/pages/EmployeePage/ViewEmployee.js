@@ -1,16 +1,11 @@
 import React, {useState} from 'react'
 import axios from 'axios';
 // import { withRouter } from "react-router";
-import { Outlet, Link, useParams } from "react-router-dom";
+import { useParams,useNavigate, Link } from "react-router-dom";
 import '../css/pages.css';
 
-
 export default function ViewEmployee() {
-    const view_table = {
-        textAlign: 'center',
-        color: 'red'
-    }
-
+    let navigate = useNavigate();       //use for back button
     let { id } = useParams();
     const [first_name, setFirst] = useState("")
     const [last_name, setLast] = useState("")
@@ -22,7 +17,7 @@ export default function ViewEmployee() {
             setFirst(res.data.first_name)
             setLast(res.data.last_name)
             setEmail(res.data.email)
-            console.log(res.data)
+            // console.log(res.data)
         })
         .catch(error => {
             console.log(error);
@@ -52,6 +47,11 @@ export default function ViewEmployee() {
                     </tbody>
                 </table>
             </div>
+                <br />
+                <button className='btn btn-secondary'  onClick={() => navigate(-1)}>Back</button>
+                <Link to={"/edit/"+ id}>
+                        <button type="submit" className="btn btn-success cancel">Edit</button>                  
+                </Link> 
             
         </div>
     </>

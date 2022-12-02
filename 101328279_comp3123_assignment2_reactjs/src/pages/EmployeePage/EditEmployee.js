@@ -1,65 +1,53 @@
 import axios from 'axios'
-import React, { Component } from 'react'
+import React, {useEffect, useState} from 'react'
+import { useParams, useNavigate } from "react-router-dom";
+import '../css/pages.css';
 
-export default class EditEmployee extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            first_name: '',
-            last_name: '',
-            email: '',
-        }
+export default function EditEmployee() {
+    let navigate = useNavigate();       //use for cancel button
+    let { id } = useParams();
+    const [employee, setEmployee] = useState({
+        first_name: "",
+        last_name: "",
+        email: ""
+    })
+
+    const {first_name, last_name, email} = employee
+
+    useEffect( () => {
+        getEmployee()
+    }, [])
+    
+    //Get Employee By ID
+    const getEmployee = async () => {
+        await axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
+        .then(res =>  { 
+           setEmployee(res.data)
+            // console.log(res.data)
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
-    componentDidMount(){
-        axios.get('https://comp3123-101328279-assignment2.herokuapp.com/api/employee/' + this.props.id)
+    let onSubmit = async (e) => {
+        e.preventDefault();
+        await axios.put(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`, employee)
         .then(res => {
-            this.setState({
-                first_name: res.data.first_name,
-                last_name: res.data.last_name,
-                email: res.data.email
-            })
             console.log(res.data)
         })
         .catch((error) => console.log(error))
     }
 
-    getEmployeeById(id) {
-        axios.get(`ttps://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
-        .then(res =>  { 
-            console.log(res.data)
-        })
+    const onEmployeeChange = (e) => {
+        setEmployee({...employee, [e.target.name]: e.target.value})
     }
 
-    onChangeEvent = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
-    }
-
-    
-    editEmployee = async (e) => {
-        e.preventDefault();
-        const newEmployee = {
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            email: this.state.email
-        }
-        await axios.put('https://comp3123-101328279-assignment2.herokuapp.com/api/employee/' + this.props.id, newEmployee )
-        // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
-        .then(res => { 
-            console.log(res.status); 
-            // console.log(res.data);
-        })
-        .catch(error => console.log(error))
-    }
-
-
-
-  render() {
     return (
         <div className="add-employee">
             <h1>Edit Employee</h1>
 
-            <form onSubmit={this.editEmployee}>
+            <form onSubmit={onSubmit}>
                 <div className="form-group">
                         <label htmlFor="firstName">First Name:</label>
                         <input 
@@ -67,8 +55,8 @@ export default class EditEmployee extends Component {
                             className="form-control" 
                             id="firstName" 
                             name="first_name" 
-                            value={this.state.first_name}
-                            onChange={this.onChangeEvent}
+                            value={first_name}
+                            onChange={(e) => onEmployeeChange(e)}
                             placeholder="First Name" required
                         />
                 </div>
@@ -80,8 +68,8 @@ export default class EditEmployee extends Component {
                             className="form-control" 
                             id="lastName" 
                             name="last_name" 
-                            value={this.state.last_name}
-                            onChange={this.onChangeEvent}
+                            value={last_name}
+                            onChange={(e) => onEmployeeChange(e)}
                             placeholder="Last Name" required
                         />
                 </div>
@@ -93,18 +81,17 @@ export default class EditEmployee extends Component {
                             className="form-control" 
                             id="emailAddress"
                             name="email"
-                            value={this.state.email}
-                            onChange={this.onChangeEvent}
+                            value={email}
+                            onChange={(e) => onEmployeeChange(e)}
                             placeholder="Email Address" required
                         />
                 </div>
                 <br />
                 <div className='button-div'>
-                    <button type="submit" className="btn btn-success">Save</button>
-                    {/* <button type="submit" className="btn btn-danger cancel">Cancel</button> */}
+                    <button type="submit" className="btn btn-secondary cancel" onClick={() => navigate(-1)}>Back</button>
+                    <button type="submit" className="btn btn-success cancel">Save</button>
                 </div>                        
             </form>
         </div>
     )
-  }
 }

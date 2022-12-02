@@ -3,16 +3,17 @@ import axios from 'axios';
 import '../css/pages.css';
 import { Link } from "react-router-dom";
 
+const INITIAL_VALUE = {
+    first_name : "",
+    last_name : "",
+    email: ""
+}
 
 export default class Add_Employee extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {
-            first_name : "",
-            last_name : "",
-            email: ""
-        }
+        this.state = {...INITIAL_VALUE}
     }
 
 
@@ -35,7 +36,15 @@ export default class Add_Employee extends Component {
                 alert('Employee Added')
             // console.log(res.data);
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            console.log(error)
+            alert('Employee Not Added. Your email already exists')
+        })
+    }
+
+    clearForm = (event) => {
+        event.preventDefault()
+        this.setState({...INITIAL_VALUE})
     }
 
     render() {
@@ -85,7 +94,8 @@ export default class Add_Employee extends Component {
                     <br />
                     <div className='button-div'>
                         <button type="submit" className="btn btn-success">Save</button>
-                        <Link to='/list'><button type="submit" className="btn btn-danger cancel">Cancel</button></Link>
+                        <button type="reset" className="btn btn-danger cancel" value='Reset' onClick={(e) => this.clearForm(e)}>Reset</button> 
+                        <Link to='/list'><button type="submit" className="btn btn-secondary cancel ">Back</button></Link>
                     </div>                        
                 </form>
             </div>

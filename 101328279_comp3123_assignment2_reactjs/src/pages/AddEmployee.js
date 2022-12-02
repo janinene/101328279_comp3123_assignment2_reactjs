@@ -19,28 +19,18 @@ export default class Add_Employee extends Component {
 
     createNewEmployee = async (e) => {
         e.preventDefault();
-        const newEmployee = JSON.stringify({
+        const newEmployee = {
             first_name: this.state.first_name,
             last_name: this.state.last_name,
             email: this.state.email
+        }
+        await axios.post(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/add`, newEmployee )
+        // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
+        .then(res => { 
+            console.log(res.status); 
+            // console.log(res.data);
         })
-        console.log(newEmployee)
-        await axios.post(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/add`, { newEmployee }, {headers:{"Content-Type" : "text/json"}})
-        .then(res => { console.log(res.status); console.log(res.data);})
-        .catch(res => console.log(res))
-        // try {
-        //     // make axios post request
-        //     await axios({
-        //       method: "post",
-        //       url: "https://comp3123-101328279-assignment2.herokuapp.com/api/employee/add",
-        //       data: newEmployee,
-        //     //   headers: { "Content-Type": "multipart/form-data" },
-        //     });
-        //     console.log(newEmployee)
-
-        //   } catch(error) {
-        //     console.log(error)
-        //   }
+        .catch(error => console.log(error))
     }
 
     render() {
@@ -89,7 +79,7 @@ export default class Add_Employee extends Component {
                     </div>
                     <br />
                     <div className='button-div'>
-                        <button type="submit" className="btn btn-success" onClick={this.createNewEmployee}>Save</button>
+                        <button type="submit" className="btn btn-success">Save</button>
                         {/* <button type="submit" className="btn btn-danger cancel">Cancel</button> */}
                     </div>                        
                 </form>

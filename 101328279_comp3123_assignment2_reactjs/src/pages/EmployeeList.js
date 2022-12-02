@@ -29,6 +29,7 @@ export default class Employee_List extends Component {
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Employee Email</th>
+                                <th scope="col">Label</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,10 @@ export default class Employee_List extends Component {
                                 <td>{employee.first_name}</td>    
                                 <td>{employee.last_name}</td>    
                                 <td>{employee.email}</td>   
+                                <td>
+                                    <button type="submit" className="btn btn-success">Update</button>
+                                    <button type="submit" className="btn btn-danger cancel">Delete</button>
+                                </td>   
                             </tr>                                                                                             
                             </>                        
                         ))

@@ -29,7 +29,6 @@ export default class Add_Employee extends Component {
             email: this.state.email
         }
         await axios.post(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/add`, newEmployee )
-        // await axios.post(`http://localhost:8080/api/employee/add`,  newEmployee )
         .then(res => { 
             console.log(res.status); 
             if (res.status === 200)

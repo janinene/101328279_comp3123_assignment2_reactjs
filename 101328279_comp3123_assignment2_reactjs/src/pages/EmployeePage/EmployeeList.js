@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import axios from 'axios';
 
 import EmpKey from '../keys/employee_list_key'
-// import { Outlet, Link } from "react-router-dom";
-// import View from './/ViewEmployee';
-
 
 
 export default class Employee_List extends Component {
@@ -24,30 +21,10 @@ export default class Employee_List extends Component {
         })
     }
 
-     //Get Employee By ID
-     getEmployeeDataByID = (id) => {
-        axios.get(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
-        .then(res =>  { 
-            console.log(res.data)
-        })
-    }
 
     getEmployees() {
         return this.state.employees.map((employee) =>{
             return <EmpKey employees={employee} key={employee.id} />;
-        })
-    }
-
-    //Get User By ID
-    deleteUserDataByID = (id) => {
-        axios.delete(`https://comp3123-101328279-assignment2.herokuapp.com/api/employee/${id}`)
-        .then(res =>  { 
-            console.log(res.data)
-            let employeeList = this.state.employees.filter(u => {
-                return u.id !== id
-            })
-
-            this.setState({...this.state, employees: employeeList})
         })
     }
 
